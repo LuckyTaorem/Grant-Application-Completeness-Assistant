@@ -24,18 +24,24 @@ export default function GrantAssistant() {
   }, [files.guideline, files.draft, metadata]);
 
   const handleUpload = async () => {
-    if (!files.guideline || !files.draft) return alert("Upload both documents");
-    setIsLoading(true);
-    setIsStale(false);
+  if (!files.guideline || !files.draft) return alert("Upload both documents");
+  setIsLoading(true);
+  setIsStale(false);
 
-    const formData = new FormData();
-    formData.append("guideline", files.guideline);
-    formData.append("draft", files.draft);
-    formData.append("supporting_metadata", metadata);
+  const formData = new FormData();
+  formData.append("guideline", files.guideline);
+  formData.append("draft", files.draft);
+  formData.append("supporting_metadata", metadata);
 
-    try {
-      const res = await fetch("http://localhost:8000/api/extract-requirements", { method: "POST", body: formData });
-      const data = await res.json();
+  // Determine the base URL dynamically
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/extract-requirements`, { 
+      method: "POST", 
+      body: formData 
+    });
+    const data = await res.json();
       
       setAnalysis(data);
       
