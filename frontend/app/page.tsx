@@ -99,12 +99,12 @@ export default function GrantAssistant() {
             <h2 className="font-semibold text-lg mb-4">Application Inputs</h2>
             <div className="space-y-4 text-sm">
               <div>
-                <label className="block font-medium mb-1 text-slate-700">1. Guideline Document (.txt)</label>
+                <label className="block font-medium mb-1 text-slate-700">1. Guideline Document (.txt,.pdf,.doc,.docx)</label>
                 <input type="file" accept=".txt,.pdf,.doc,.docx"  className="w-full file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border rounded" 
                   onChange={e => setFiles(f => ({ ...f, guideline: e.target.files?.[0] || null }))} />
               </div>
               <div>
-                <label className="block font-medium mb-1 text-slate-700">2. Draft Application (.txt)</label>
+                <label className="block font-medium mb-1 text-slate-700">2. Draft Application (.txt,.pdf,.doc,.docx)</label>
                 <input type="file" accept=".txt,.pdf,.doc,.docx" className="w-full file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border rounded" 
                   onChange={e => setFiles(f => ({ ...f, draft: e.target.files?.[0] || null }))} />
               </div>
