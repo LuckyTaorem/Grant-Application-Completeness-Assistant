@@ -24,8 +24,8 @@ An AI-powered application that reviews draft funding applications against suppli
 
 ### 1. Clone the repository
 ```bash
-git clone <your-github-repo-url>
-cd aggroso
+git clone https://github.com/LuckyTaorem/Grant-Application-Completeness-Assistant
+cd Grant-Application-Completeness-Assistant
 ```
 
 ### 2. Backend Setup
