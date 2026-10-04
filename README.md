@@ -10,6 +10,26 @@ An AI-powered application that reviews draft funding applications against suppli
 * **Deterministic Scoring:** The completion percentage is calculated via strict math based on human-confirmed requirements, keeping the AI out of final decision-making.
 * **Multi-Format Support:** Accepts `.txt`, `.pdf`, `.docx`, and `.doc` files.
 
+## Completed and Excluded Scope
+**Completed Scope:**
+* Extract eligibility and submission requirements from guidelines.
+* Distinguish mandatory requirements from recommendations.
+* Map application content to each requirement and cite the exact source text.
+* Identify missing, weak, or ambiguous evidence and generate clarification questions.
+* Identify claims not supported by supplied document metadata.
+* Calculate checklist completion using deterministic math (AI is excluded from scoring).
+* Allow users to confirm, correct, or reject mappings.
+* Preserve versions and mark the assessment as stale when inputs change.
+* Generate a reviewed completeness summary.
+* Multi-format support (`.txt`, `.pdf`, `.docx`, `.doc`).
+
+**Excluded Scope:**
+* External grant-database search.
+* Application submission or form autofill.
+* Financial forecasting or budget analysis.
+* Automatic document writing.
+* Authoritative legal or funding-eligibility decisions.
+
 ## Tech Stack
 * **Frontend:** Next.js (React), Tailwind CSS, Lucide Icons
 * **Backend:** FastAPI (Python), PyPDF2, python-docx
@@ -73,6 +93,21 @@ cd frontend
 npm run dev
 ```
 *The UI will run on `http://localhost:3000`*
+
+## Tests
+To test the application, upload a dummy Guideline and Draft Application.
+1. Supply a requirement (e.g., "Must be a 501(c)(3)") and a draft that meets it ("We are a 501(c)(3)") to test Strong mappings.
+2. Supply a requirement (e.g., "Must provide tax returns") but omit it from the optional metadata box to test Missing Document tracking.
+3. Supply a draft that claims an action but lacks the metadata proof to test the Unsupported Claim flag.
+
+## Limitations
+- Non-Authoritative: This tool relies on semantic text matching. It does not replace human grant writers or legal compliance checks.
+- OCR: The application relies on text-extractable PDFs. Scanned image-based PDFs will fail parsing unless pre-processed with an OCR tool.
+- Hallucination Risk: Mitigated by the mandatory human-in-the-loop confirmation step. AI outputs do not count toward the final score until human-verified.
+
+## Deployment Details
+- Frontend: Deployed via Vercel. Configured with the `NEXT_PUBLIC_API_URL` environment variable to point to the production backend.
+-Backend: Containerized using Docker. Deployed to a 24/7 hosting provider (e.g., Back4app Containers, Fly.io) to avoid the 10-second serverless timeout restrictions and 15-minute sleep states of standard free-tier hosting.
 
 ## Usage Guide
 1. Open your browser and navigate to `http://localhost:3000`.
