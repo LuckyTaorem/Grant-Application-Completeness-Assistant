@@ -16,6 +16,10 @@ load_dotenv()
 
 app = FastAPI(title="Grant Completeness Assistant API")
 
+@app.get("/ping")
+async def ping():
+    return {"status": "awake"}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
